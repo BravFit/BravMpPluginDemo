@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "MeasureHeader": "../../components/MeasureHeader/MeasureHeader",
+    "MeasureReport": "../../components/MeasureReport/MeasureReport"
+  }
+}

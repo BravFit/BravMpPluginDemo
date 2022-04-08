@@ -1,0 +1,18 @@
+import BravLibType from '../typings';
+export declare function number2hex(value: number): string;
+export declare function toFormatHexString(bytes: number[]): string;
+export declare function toPrecision(value: number, places: number): number;
+export declare function kg2jin(value: number): number;
+export declare function jin2kg(value: number): number;
+export declare function kg2lb(value: number): number;
+export declare function lb2kg(value: number): number;
+export declare function jin2lb(value: number): number;
+export declare function lb2jin(value: number): number;
+export declare function formatTime(date: Date, fmt?: string): string;
+export declare function ab2Array(buffer: ArrayBuffer): number[];
+export declare function formatArrayToHex(arr: Uint8Array | number[]): string;
+export declare function timeoutPromise(overtime: number, data?: any): Promise<any>;
+export declare function buildWeight(hightByte: number, lowByte: number): number;
+export declare function randomByte(): number;
+export declare function randomImpedance(): number;
+export declare function nameOfUnit(unit: BravLibType.BravScaleUnit): string;

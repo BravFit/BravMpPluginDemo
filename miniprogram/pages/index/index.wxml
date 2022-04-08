@@ -1,0 +1,3 @@
+<MeasureHeader state="{{state}}" bindrestart="restart" themeColor="{{themeColor}}" score="{{score}}" realTimeWeight="{{realTimeWeight}}" unit="{{unit}}" bleState="{{bleState}}" />
+
+<MeasureReport measure="{{measureData}}" />

@@ -1,0 +1,43 @@
+<!-- components/MeasurePanel/measurePanel.wxml  {{item.icon}} -->
+<view class="main">
+  <view class="list" wx:for="{{measure}}" wx:key="name">
+    <view data-index="{{index}}" bindtap="onClickToggleExtend" class='lists'>
+      <view class="itemDataTitle">
+        <view  style="flex:1;">
+          <text class="itemDataName">{{item.name}}</text>
+        </view>
+        <view  style="flex:1;">
+          <text class="itemDataValue">{{item.value}} {{item.unit}}</text>
+        </view>
+        <view wx:if="{{item.isBarVisible }}" style="flex:1;">
+          <text class="titleLevelName" style='color:{{item.targetLevel.color}}'>
+            {{item.targetLevel.name}}
+          </text>
+        </view>
+      </view>
+      <view wx:if='{{item.isExtend}}'>
+        <view class="boundaryContainer" wx:if="{{item.boundaries.length > 0}}">
+          <view class="boundary_space" />
+          <view wx:for="{{item.boundaries}}" wx:key="*this" wx:for-item="b" class="boundary">
+            {{b}}
+          </view>
+          <view class="boundary_space" />
+        </view>
+        <view class="barContainer" wx:if="{{item.boundaries.length > 0}}">
+          <view wx:for="{{item.levels}}" wx:key="*this" wx:for-item="b" wx:for-index="barIndex" class="barItemContainer">
+            <view class="itemBar" style="background-color:{{b.color}}"></view>
+            <view class="{{barIndex == item.levelIndex ? 'levelNameSelected' :'levelName'}}" style="color:{{barIndex == item.levelIndex ? b :'#666'}}">
+              {{item.levels[barIndex].name}}
+            </view>
+          </view>
+        </view>
+        <view class="descContainer">{{item.desc}}</view>
+        <view class="descContainer">{{item.intro}}</view>
+        <view class="bottomLine_extend" />
+      </view>
+      <view wx:else>
+        <view class="bottomLine" />
+      </view>
+    </view>
+  </view>
+</view>

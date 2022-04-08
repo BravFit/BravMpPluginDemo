@@ -1,0 +1,115 @@
+/* plugin/components/Measure/index.wxss */
+.version {
+  padding: 20rpx 0;
+  text-align: center;
+  font-size: 12px;
+}
+
+.btn {
+  width: 90rpx;
+  height: 90rpx;
+  margin: auto;
+  position: absolute;
+  right: 0rpx;
+  top: 0rpx;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn .image {
+  display: block;
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.headder {
+  height: auto;
+  overflow: hidden;
+  background: #01ca9e;
+  position: relative;
+}
+
+.time {
+  width: 100%;
+  /* height: 128rpx; */
+  height: 44rpx;
+  color: #97ead8;
+  text-align: center;
+}
+
+.h_txt {
+  width: 100%;
+  height: auto;
+  color: #e5e5e5;
+  text-align: center;
+  font-size: 22rpx;
+  padding: 10rpx;
+}
+
+.fen-wrap {
+  width: 100%;
+  color: #aaa;
+  padding-bottom: 40rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  transition: all 0.5s ease-out;
+}
+
+.fen {
+  width: 310rpx;
+  margin: 0 auto;
+  /* border-radius: 50%; */
+  color: #fff;
+  text-align: center;
+  font-size: 75rpx;
+  font-weight: 800;
+  position: relative;
+}
+
+.fen .image {
+  position: absolute;
+  width: 310rpx;
+  height: 310rpx;
+  left: 0;
+  top: 0;
+}
+
+.fen .txt1 {
+  font-size: 44rpx;
+}
+
+.fen .txt2 {
+  font-size: 28rpx;
+  padding-left: 12rpx;
+}
+
+.we-icon {
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+}
+
+.we-icon .image {
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  top: 12rpx;
+}
+
+.we-icon .text {
+  margin-left: 10rpx;
+  font-size: 28rpx;
+  color: #01ca9e;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

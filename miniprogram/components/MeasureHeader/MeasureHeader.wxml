@@ -1,0 +1,29 @@
+<!-- plugin/components/Measure/index.wxml -->
+<wxs module="watch">
+  module.exports.score = function (score, n) {
+    if (n == 1) {
+      return parseInt(score)
+    } else if (n == 2) {
+      return score.split(".")[1] || 0
+    }
+  };
+</wxs>
+<view class="headder" style="background-color:{{themeColor}}">
+  <view class='btn' bindtap="onClickRestartScan" type="primary">
+    <image class="image" bind:transitionend="transitionend" animation="{{animationData}}" src='../../image/sx.png'></image>
+  </view>
+  <view class="time">{{measure_time_string}}</view>
+  <view class='h_txt'>{{bleState}}</view>
+  <view class="fen-wrap" style="height: {{state === 'running' ? '310rpx': '120rpx'}};line-height: {{state === 'running' ? '310rpx': '120rpx'}}">
+    <view class="fen">
+      <image class="image" src="../../image/img1.png" wx:if="{{state === 'running'}}" style="{{state === 'running' ? 'animation: rotating 3.5s .5s linear infinite,opacity .35s .5s linear both;' : ''}}" />
+
+      <text>{{realTimeWeight}}</text>
+      <text class="txt2">{{unit}}</text>
+    </view>
+
+  </view>
+</view>
+<view class='we-icon' wx:if="{{!hideNameDes}}">
+  <text class="text" style="color:{{themeColor}}">百乐富体脂秤</text>
+</view>
