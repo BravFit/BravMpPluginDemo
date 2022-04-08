@@ -1,22 +1,10 @@
 // index.ts
-// demo/measuring/measuring.js
-// const plugin = require('../../lib/bravlib/index');
-// import {
-//   BravApiProvider,
-//   BravLibType,
-//   BravScaleDataImpl,
-// } from '../../lib/bravlib/index';
-
 import BravLibType from '../../lib/bravlib/types/typings';
 const BravPlugin = requirePlugin('brav-lib');
 const { BravApiProvider, BravScaleDataImpl } = BravPlugin;
 
 import ReportBuilder from '../../report/ReportBuilder';
 import { ReportItem } from '../../report/typings';
-
-// console.log('插件：', plugin);
-// const { BravApiProvider, BravLibType, BravScaleDataImpl, ReportBuilder } =
-//   plugin;
 
 // 获取应用实例
 const app = getApp<IAppOption>();
@@ -40,6 +28,8 @@ type MeasurePage = {
   bleApi: BravLibType.BravBleApi;
   doStartScan: () => void;
   mockReportData: () => void;
+  updateState: (state: string) => void;
+  checkPermission: () => Promise<boolean>;
 } & WechatMiniprogram.Page.DataOption;
 
 Page({
@@ -110,12 +100,59 @@ Page({
   },
 
   async doStartScan() {
+    const hasPermission = await this.checkPermission();
+    if (!hasPermission) {
+      return;
+    }
     const result = await this.bleApi.startScan({});
     if (result.isSuccess) {
       this.updateState('蓝牙正在扫描，请上秤');
     } else {
       this.updateState('扫描失败');
     }
+  },
+
+  //检查各个权限是否正常
+  async checkPermission() {
+    const systemInfo = await wx.getSystemInfo();
+    const appAuthorizeSetting = wx.getAppAuthorizeSetting();
+    if (systemInfo.platform === 'ios') {
+      if (appAuthorizeSetting.bluetoothAuthorized === 'denied') {
+        //微信获得系统的蓝牙授权
+        this.updateState('IOS未获得系统蓝牙权限');
+        return false;
+      }
+    } else if (systemInfo.platform === 'android') {
+      if (appAuthorizeSetting.locationAuthorized === 'denied') {
+        this.updateState('Android未获得系统定位权限，无法使用蓝牙');
+        return false;
+      } else if (appAuthorizeSetting.locationAuthorized === 'authorized') {
+        const systemSetting = wx.getSystemSetting();
+        if (!systemSetting.locationEnabled) {
+          //系统定位服务未启动，
+          this.updateState('安卓未打开定位开关，无法使用');
+          return false;
+        }
+      }
+    } else {
+      this.updateState('暂不支持该系统');
+      return false;
+    }
+
+    const authSetting = (await wx.getSetting({})).authSetting;
+    console.log('获取到的权限为：', appAuthorizeSetting, authSetting);
+    if (!authSetting['scope.bluetooth']) {
+      //没有蓝牙权限，则向用户申请
+      try {
+        await wx.authorize({ scope: 'scope.bluetooth' });
+        console.log('授权成功');
+      } catch (e) {
+        //授权失败
+        this.updateState('微信蓝牙权限授权失败');
+        return false;
+      }
+    }
+    return true;
   },
 
   async handlerConnect(device: BravLibType.BravDevice) {

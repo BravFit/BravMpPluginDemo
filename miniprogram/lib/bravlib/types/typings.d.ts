@@ -12,7 +12,7 @@ declare namespace BravLibType {
         connectDevice(bravDevice: BravDevice | string, options: any, listener: BravDeviceEventDelegate, connectionChangeListener?: BravBleConnectionChangeDelegate | undefined): Promise<BravResult<any>>;
         disconnectDevice(deviceId: string): void;
     }
-    interface BravDeviceHandler {
+    export interface BravDeviceHandler {
         device: BravDevice;
         connectionChangeListener: BravBleConnectionChangeDelegate | undefined;
         onDeviceReady(services: BravBleService[]): void;
@@ -141,7 +141,7 @@ declare namespace BravLibType {
     type BravDeviceConnectionState = 'Disconnected' | 'Connecting' | 'Connected' | 'Disconnecting';
     type BravDeviceProfileType = 'BravBroadcastScale';
     type BravErrorCode = 'Success' | 'DeviceNotFound' | 'BluetoothDisabled' | 'DeviceProfileNotFind';
-    type BravGender = 'Male' | 'Female';
+    export type BravGender = 'Male' | 'Female';
     type BravScaleAlgorithmMethod = 'common' | 'asia';
     type BravScaleUnit = 'kg' | 'jin' | 'lb';
 }

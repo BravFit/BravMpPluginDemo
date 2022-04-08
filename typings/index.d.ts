@@ -1,4 +1,5 @@
 /// <reference path="./types/index.d.ts" />
+/// <reference path="../miniprogram/lib/bravlib/types/index.d.ts" />
 
 interface IAppOption {
   globalData: {
